@@ -7,7 +7,16 @@
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "seed": "node scripts/seed.js",
-    "clear": "node scripts/clear.js"
+    "clear": "node scripts/clear.js",
+    "seed:provinces": "node scripts/seed-provinces.js",
+    "seed:all": "node scripts/seed-all.js",
+    "seed:all:90": "node scripts/seed-all.js 90",
+    "seed:all:365": "node scripts/seed-all.js 365",
+    "predict:next": "node scripts/predict-next.js",
+    "train:model": "node scripts/train-model.js",
+    "prediction:job": "node scripts/prediction-job.js",
+    "generate:today": "node scripts/prediction-job.js",
+    "pregenerate:today": "node scripts/prediction-job.js"
   },
   "dependencies": {
     "axios": "^1.7.9",

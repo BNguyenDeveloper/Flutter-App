@@ -1,16 +1,29 @@
-const dotenv = require('dotenv');
+require('dotenv').config();
+
 const mongoose = require('mongoose');
+
 const Result = require('../src/models/Result');
 const Prediction = require('../src/models/Prediction');
+const Province = require('../src/models/Province');
+const LotteryNumber = require('../src/models/LotteryNumber');
 
-dotenv.config();
+const MONGO_URI = process.env.MONGO_URI || process.env.MONGODB_URI;
 
 async function main() {
-  const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/lottery_ai_app';
-  await mongoose.connect(uri);
-  await Result.deleteMany({});
-  await Prediction.deleteMany({});
-  console.log('Cleared results and predictions');
+  if (!MONGO_URI) {
+    throw new Error('Missing MONGO_URI or MONGODB_URI in .env');
+  }
+
+  await mongoose.connect(MONGO_URI);
+
+  await Promise.all([
+    Result.deleteMany({}),
+    Prediction.deleteMany({}),
+    Province.deleteMany({}),
+    LotteryNumber.deleteMany({})
+  ]);
+
+  console.log('Cleared Result, Prediction, Province, LotteryNumber');
   await mongoose.disconnect();
 }
 

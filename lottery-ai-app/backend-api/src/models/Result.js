@@ -3,22 +3,28 @@ const mongoose = require('mongoose');
 const ResultSchema = new mongoose.Schema(
   {
     date: { type: String, required: true, trim: true },
-    region: { type: String, required: true, trim: true, uppercase: true },
-    prizes: { type: mongoose.Schema.Types.Mixed, required: true, default: {} },
-    twoDigits: {
-      type: [String],
+    drawDate: { type: Date, required: true, index: true },
+
+    area: {
+      type: String,
+      enum: ['mien_bac', 'mien_trung', 'mien_nam'],
       required: true,
-      validate: {
-        validator: function (arr) {
-          return Array.isArray(arr) && arr.every((n) => /^\d{2}$/.test(n));
-        },
-        message: 'twoDigits must be an array of 2-digit strings.'
-      }
-    }
+      index: true
+    },
+
+    province: { type: String, required: true, trim: true },
+    code: { type: String, required: true, trim: true, uppercase: true, index: true },
+
+    weekday: { type: String, default: '' },
+    prizes: { type: mongoose.Schema.Types.Mixed, required: true, default: {} },
+    special: { type: String, default: '' }
   },
   { timestamps: true }
 );
 
-ResultSchema.index({ date: 1, region: 1 }, { unique: true });
+ResultSchema.index({ code: 1, date: 1 }, { unique: true });
+ResultSchema.index({ code: 1, drawDate: -1 });
+ResultSchema.index({ area: 1, drawDate: -1 });
+ResultSchema.index({ province: 1, drawDate: -1 });
 
 module.exports = mongoose.model('Result', ResultSchema);

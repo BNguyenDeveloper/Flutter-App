@@ -5,8 +5,13 @@ const router = express.Router();
 router.get('/frequency', async (req, res, next) => {
   try {
     const data = await analysisService.getFrequency({
-      region: req.query.region || 'MB',
-      days: req.query.days || 30
+      area: req.query.area,
+      province: req.query.province,
+      code: req.query.code,
+      region: req.query.region || 'XSMB',
+      days: req.query.days || 30,
+      type: req.query.type || 'last2',
+      isSpecial: req.query.isSpecial
     });
     res.json({ data });
   } catch (error) {
@@ -17,7 +22,10 @@ router.get('/frequency', async (req, res, next) => {
 router.get('/hot-cold', async (req, res, next) => {
   try {
     const data = await analysisService.getHotCold({
-      region: req.query.region || 'MB',
+      area: req.query.area,
+      province: req.query.province,
+      code: req.query.code,
+      region: req.query.region || 'XSMB',
       days: req.query.days || 30,
       size: req.query.size || 10
     });
@@ -29,7 +37,12 @@ router.get('/hot-cold', async (req, res, next) => {
 
 router.get('/gap', async (req, res, next) => {
   try {
-    const data = await analysisService.getGap({ region: req.query.region || 'MB' });
+    const data = await analysisService.getGap({
+      area: req.query.area,
+      province: req.query.province,
+      code: req.query.code,
+      region: req.query.region || 'XSMB'
+    });
     res.json({ data });
   } catch (error) {
     next(error);

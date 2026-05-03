@@ -4,7 +4,12 @@ const router = express.Router();
 
 router.get('/latest', async (req, res, next) => {
   try {
-    const result = await resultService.getLatestResult(req.query.region);
+    const result = await resultService.getLatestResult({
+      area: req.query.area,
+      province: req.query.province,
+      code: req.query.code,
+      region: req.query.region
+    });
     res.json({ data: result });
   } catch (error) {
     next(error);
@@ -13,7 +18,13 @@ router.get('/latest', async (req, res, next) => {
 
 router.get('/history', async (req, res, next) => {
   try {
-    const results = await resultService.getHistory({ region: req.query.region, limit: req.query.limit });
+    const results = await resultService.getHistory({
+      area: req.query.area,
+      province: req.query.province,
+      code: req.query.code,
+      region: req.query.region,
+      limit: req.query.limit
+    });
     res.json({ data: results });
   } catch (error) {
     next(error);

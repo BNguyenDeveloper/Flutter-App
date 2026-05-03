@@ -6,6 +6,8 @@ const connectDB = require('./config/db');
 const resultsRoutes = require('./routes/results.routes');
 const analysisRoutes = require('./routes/analysis.routes');
 const predictionRoutes = require('./routes/prediction.routes');
+const provincesRoutes = require('./routes/provinces.routes');
+const statsRoutes = require('./routes/stats.routes');
 
 dotenv.config();
 
@@ -23,9 +25,11 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+app.use('/api/provinces', provincesRoutes);
 app.use('/api/results', resultsRoutes);
 app.use('/api/analysis', analysisRoutes);
 app.use('/api/predictions', predictionRoutes);
+app.use('/api/stats', statsRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Route not found' });

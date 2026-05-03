@@ -1,0 +1,46 @@
+{
+  "version": "lottery_temporal_logistic_v1",
+  "trainedAt": "2026-05-02T15:10:09.185Z",
+  "featureNames": [
+    "southHotScore",
+    "centralRepeatScore",
+    "northRecentScore",
+    "cascadeScore",
+    "gapCycleScore",
+    "markovScore",
+    "gapNormalized"
+  ],
+  "weights": [
+    -0.048495,
+    -0.011664,
+    -0.007443,
+    -0.029215,
+    -0.010223,
+    0.019708,
+    0.023489
+  ],
+  "bias": 0.042656,
+  "metrics": {
+    "rows": 8900,
+    "positives": 2123,
+    "negatives": 6777,
+    "positiveRate": 0.2385,
+    "accuracyAt05": 0.5156,
+    "logLoss": 0.6926,
+    "top10PercentHitRate": 0.2674
+  },
+  "target": {
+    "area": "mien_bac",
+    "province": "Miền Bắc",
+    "code": "XSMB"
+  },
+  "recentDays": 14,
+  "trainDays": 120,
+  "algorithm": "logistic_regression_gradient_descent",
+  "temporalOrder": [
+    "mien_nam",
+    "mien_trung",
+    "mien_bac"
+  ],
+  "note": "ML score học từ feature rule Nam -> Trung -> Bắc. Đây là xác suất tương đối, không đảm bảo trúng thưởng."
+}
