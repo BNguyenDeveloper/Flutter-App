@@ -16,7 +16,9 @@
     "train:model": "node scripts/train-model.js",
     "prediction:job": "node scripts/prediction-job.js",
     "generate:today": "node scripts/prediction-job.js",
-    "pregenerate:today": "node scripts/prediction-job.js"
+    "pregenerate:today": "node scripts/prediction-job.js",
+    "etl:daily": "node scripts/etl-daily.js",
+    "train:weekly": "node scripts/train-weekly.js"
   },
   "dependencies": {
     "axios": "^1.7.9",

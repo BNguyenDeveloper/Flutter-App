@@ -373,11 +373,16 @@ async function generateTemporalPrediction(payload = {}) {
       province: target.province,
       code: target.code,
       region: target.code,
+      topK,
       numbers: numbers.map((item) => ({
         number: item.number,
         score: item.score,
         reason: item.reason
       })),
+      scores: Object.fromEntries(numbers.map((item) => [item.number, item.score])),
+      explanation: 'Chỉ là xếp hạng xác suất tương đối theo thống kê, không đảm bảo trúng thưởng.',
+      modelVersion: modelDoc?.modelVersion || 'no_ml_model',
+      generatedAt: new Date(),
       model: modelDoc
         ? `mongodb:${modelDoc.modelVersion}`
         : 'temporal_cascade_rule_v3_no_ml_model'

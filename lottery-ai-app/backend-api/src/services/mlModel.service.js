@@ -147,11 +147,13 @@ async function saveModel(code, modelData, meta = {}) {
     },
     {
       code: normalizedCode,
+      modelType: meta.modelType || 'temporal_cascade_logistic_regression',
       modelVersion,
       trainedAt: new Date(),
       historyDays: meta.historyDays || 365,
       recentDays: meta.recentDays || 14,
       metrics: meta.metrics || modelData.metrics || {},
+      artifactPath: meta.artifactPath || `mongodb:ml_models/${normalizedCode}/${modelVersion}`,
       model: modelData,
       active: true
     },

@@ -146,7 +146,7 @@ class ApiClient {
   }) async {
     final response = await http
         .post(
-          uri('/api/predictions/generate'),
+          uri('/api/predictions/regenerate'),
           headers: const {'Content-Type': 'application/json'},
           body: jsonEncode({
             'area': area,

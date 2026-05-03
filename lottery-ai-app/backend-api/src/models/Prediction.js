@@ -15,11 +15,14 @@ const PredictionSchema = new mongoose.Schema(
     area: { type: String, enum: ['mien_bac', 'mien_trung', 'mien_nam'], required: true, index: true },
     province: { type: String, required: true, trim: true },
     code: { type: String, required: true, trim: true, uppercase: true, index: true },
-
-    // Backward compatibility.
     region: { type: String, trim: true, uppercase: true, index: true },
 
+    topK: { type: Number, default: 10 },
     numbers: { type: [PredictionNumberSchema], default: [] },
+    scores: { type: mongoose.Schema.Types.Mixed, default: {} },
+    explanation: { type: String, default: '' },
+    modelVersion: { type: String, default: '' },
+    generatedAt: { type: Date, default: Date.now, index: true },
     model: { type: String, default: 'frequency_gap_markov_ensemble' }
   },
   { timestamps: true }
