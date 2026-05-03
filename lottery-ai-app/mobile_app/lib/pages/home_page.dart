@@ -99,15 +99,6 @@ class _HomePageState extends State<HomePage> {
         topK: 5,
       );
 
-      if (predictionNumbers.isEmpty) {
-        predictionNumbers = await ApiClient.generatePrediction(
-          area: station.area,
-          province: station.province,
-          code: station.code,
-          topK: 5,
-        );
-      }
-
       if (!_isCurrentLoad(token)) return;
       setState(() {
         quickNumbers = predictionNumbers;

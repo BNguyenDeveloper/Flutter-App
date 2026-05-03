@@ -23,17 +23,17 @@ class _PredictionPageState extends State<PredictionPage> {
   @override
   void initState() {
     super.initState();
-    appState.addListener(generate);
-    generate();
+    appState.addListener(load);
+    load();
   }
 
   @override
   void dispose() {
-    appState.removeListener(generate);
+    appState.removeListener(load);
     super.dispose();
   }
 
-  Future<void> generate() async {
+  Future<void> load() async {
     final station = appState.selectedStation;
     if (station == null) return;
 
@@ -44,7 +44,7 @@ class _PredictionPageState extends State<PredictionPage> {
     });
 
     try {
-      final result = await ApiClient.generatePrediction(
+      final result = await ApiClient.fetchTodayPrediction(
         area: station.area,
         province: station.province,
         code: station.code,
@@ -70,7 +70,7 @@ class _PredictionPageState extends State<PredictionPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: RefreshIndicator(
-        onRefresh: generate,
+        onRefresh: load,
         child: ListView(
           padding: const EdgeInsets.all(20),
           children: [
@@ -81,7 +81,7 @@ class _PredictionPageState extends State<PredictionPage> {
             const SizedBox(height: 18),
             const StationSelector(),
             FilledButton.icon(
-              onPressed: loading ? null : generate,
+              onPressed: loading ? null : load,
               icon: const Icon(Icons.auto_awesome),
               label: const Text('Phân tích ngay'),
             ),

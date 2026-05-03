@@ -10,6 +10,11 @@ const MLModelSchema = new mongoose.Schema(
       trim: true
     },
 
+    modelType: {
+      type: String,
+      default: 'temporal_cascade_logistic_regression'
+    },
+
     modelVersion: {
       type: String,
       required: true
@@ -29,6 +34,11 @@ const MLModelSchema = new mongoose.Schema(
     recentDays: {
       type: Number,
       default: 14
+    },
+
+    artifactPath: {
+      type: String,
+      default: 'mongodb:ml_models'
     },
 
     metrics: {

@@ -17,7 +17,7 @@ router.get('/today', async (req, res, next) => {
   }
 });
 
-router.post('/generate', async (req, res, next) => {
+router.post('/regenerate', async (req, res, next) => {
   try {
     const prediction = await predictionService.generatePrediction({
       area: req.query.area || req.body.area,
